@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { SobreProjeto } from './components/SobreProjeto';
 import { Funcionalidades } from './components/Funcionalidades';
+import { DemoNoticias } from './components/DemoNoticias';
 import { Equipe } from './components/Equipe';
 import { Footer } from './components/Footer';
 
@@ -14,6 +15,7 @@ function App() {
         <HeroSection />
         <SobreProjeto />
         <Funcionalidades />
+        <DemoNoticias />
         <Equipe />
         <Footer />
       </div>

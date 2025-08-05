@@ -23,3 +23,27 @@ export interface SocialLink {
   icon: string;
   label: string;
 }
+
+export interface NewsItem {
+  id: string;
+  title: string;
+  content: string;
+  author: string;
+  eventDate: string;
+  createdAt: string;
+}
+
+export interface NewsFormData {
+  title: string;
+  content: string;
+  author: string;
+  eventDate: string;
+}
+
+export interface NewsContextType {
+  news: NewsItem[];
+  searchTerm: string;
+  filteredNews: NewsItem[];
+  addNews: (newsData: NewsFormData) => void;
+  setSearchTerm: (term: string) => void;
+}

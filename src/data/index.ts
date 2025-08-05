@@ -1,4 +1,4 @@
-import type { FeatureCard, TeamMember } from '../types';
+import type { FeatureCard, TeamMember, NewsItem } from '../types';
 
 export const featureCards: FeatureCard[] = [
   {
@@ -45,5 +45,40 @@ export const teamMembers: TeamMember[] = [
     description: 'Desenvolvedor Full Stack especializado em tecnologias web modernas. Pós-graduando em Desenvolvimento Web e Mobile pelo IF Sudeste MG - Campus Rio Pomba.',
     githubUrl: 'https://github.com/jonathanthomaz',
     linkedinUrl: 'https://www.linkedin.com/in/jonathan-thomaz/',
+  },
+];
+
+export const initialNews: NewsItem[] = [
+  {
+    id: '1',
+    title: 'Lançamento da Nova Funcionalidade de Moderação IA',
+    content: 'Implementamos um sistema avançado de moderação baseado em inteligência artificial que reduz em 80% o tempo necessário para revisar conteúdos na comunidade.',
+    author: 'Jonathan Thomaz',
+    eventDate: '2025-01-15',
+    createdAt: '2025-01-16T10:30:00Z',
+  },
+  {
+    id: '2',
+    title: 'Workshop: Desenvolvimento Web Moderno',
+    content: 'Participe do nosso workshop sobre as melhores práticas em desenvolvimento web utilizando TypeScript, React e Bootstrap. Evento gratuito para a comunidade.',
+    author: 'Equipe TCC',
+    eventDate: '2025-02-10',
+    createdAt: '2025-01-20T14:15:00Z',
+  },
+  {
+    id: '3',
+    title: 'Conquista: 1000 Usuários Ativos',
+    content: 'Alcançamos a marca de 1000 usuários ativos em nossa plataforma! Obrigado a toda comunidade pelo apoio e feedback construtivo.',
+    author: 'Jonathan Thomaz',
+    eventDate: '2025-01-25',
+    createdAt: '2025-01-25T16:45:00Z',
+  },
+  {
+    id: '4',
+    title: 'Atualização: Interface Responsiva Melhorada',
+    content: 'Lançamos uma nova versão da interface com melhorias significativas na experiência mobile e otimizações de performance para todos os dispositivos.',
+    author: 'Equipe TCC',
+    eventDate: '2025-02-01',
+    createdAt: '2025-02-01T09:20:00Z',
   },
 ];
