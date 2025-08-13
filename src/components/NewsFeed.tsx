@@ -3,7 +3,7 @@ import { NewsSearch } from './NewsSearch';
 import { useNews } from './useNews';
 
 export function NewsFeed() {
-  const { filteredNews, searchTerm } = useNews();
+  const { filteredNews, searchTerm, isLoading } = useNews();
 
   return (
     <div id="news-feed">
@@ -19,7 +19,16 @@ export function NewsFeed() {
 
       <NewsSearch />
 
-      {filteredNews.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary mb-3" role="status" style={{ width: '3rem', height: '3rem' }}>
+            <span className="visually-hidden">Carregando...</span>
+          </div>
+          <h5 className="text-muted">
+            {searchTerm ? 'Pesquisando notícias...' : 'Carregando notícias...'}
+          </h5>
+        </div>
+      ) : filteredNews.length === 0 ? (
         <div className="text-center py-5">
           <div className="mb-3">
             <i className="bi bi-search display-1 text-muted"></i>

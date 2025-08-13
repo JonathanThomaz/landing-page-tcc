@@ -1,16 +1,48 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { NewsItem, NewsFormData, NewsContextType } from '../types';
 import { initialNews } from '../data';
 import { NewsContext } from '../contexts/NewsContext';
+import { sleepInSeconds } from '../utils';
 
 interface NewsProviderProps {
   children: ReactNode;
 }
 
 export function NewsProvider({ children }: NewsProviderProps) {
-  const [news, setNews] = useState<NewsItem[]>(initialNews);
+  const [news, setNews] = useState<NewsItem[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+
+  const loadInitialNews = async (): Promise<void> => {
+    try {
+      setIsLoading(true);
+      await sleepInSeconds(2);
+      
+      setNews(initialNews);
+    } catch (error) {
+      console.error('Erro ao carregar notícias iniciais:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Carrega as notícias iniciais quando o componente é montado
+  useEffect(() => {
+    loadInitialNews();
+  }, []);
+
+  const setSearchTermWithDelay = async (term: string) => {
+    if (term.trim()) {
+      setIsSearching(true);
+      setSearchTerm(term);
+      await sleepInSeconds(1.5);
+      setIsSearching(false);
+    } else {
+      setSearchTerm(term);
+    }
+  };
 
   const addNews = (newsData: NewsFormData) => {
     const newNews: NewsItem = {
@@ -23,6 +55,11 @@ export function NewsProvider({ children }: NewsProviderProps) {
   };
 
   const filteredNews = useMemo(() => {
+    // Se está carregando inicial ou pesquisando, retorna array vazio
+    if (isLoading || isSearching) {
+      return [];
+    }
+
     if (!searchTerm.trim()) {
       return [...news].sort((a, b) => {
         // Ordena por data do evento (mais recente primeiro), depois por data de criação
@@ -54,14 +91,15 @@ export function NewsProvider({ children }: NewsProviderProps) {
         
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       });
-  }, [news, searchTerm]);
+  }, [news, searchTerm, isLoading, isSearching]);
 
   const value: NewsContextType = {
     news,
     searchTerm,
     filteredNews,
+    isLoading: isLoading || isSearching,
     addNews,
-    setSearchTerm,
+    setSearchTerm: setSearchTermWithDelay,
   };
 
   return (

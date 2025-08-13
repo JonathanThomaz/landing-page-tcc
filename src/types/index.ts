@@ -44,6 +44,7 @@ export interface NewsContextType {
   news: NewsItem[];
   searchTerm: string;
   filteredNews: NewsItem[];
+  isLoading: boolean;
   addNews: (newsData: NewsFormData) => void;
   setSearchTerm: (term: string) => void;
 }
